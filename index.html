@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tales from the Loop — Character Sheets</title>
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:     #0d1117;
+      --bg2:    #161b22;
+      --bg3:    #21262d;
+      --border: #30363d;
+      --teal:   #00b4d8;
+      --teal2:  #007ea1;
+      --amber:  #f4a261;
+      --red:    #e63946;
+      --green:  #56d364;
+      --text:   #c9d1d9;
+      --dim:    #8b949e;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Share Tech Mono', monospace;
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--bg2);
+      border-bottom: 2px solid var(--teal);
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .logo {
+      font-family: 'Special Elite', serif;
+      font-size: 1.2rem;
+      color: var(--teal);
+      letter-spacing: 2px;
+      white-space: nowrap;
+    }
+    .logo span { color: var(--amber); }
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    /* ── STATUSBAR ── */
+    #statusbar {
+      padding: 5px 20px;
+      font-size: 0.78rem;
+      color: var(--dim);
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+      min-height: 26px;
+    }
+    #statusbar.ok    { color: var(--green); }
+    #statusbar.err   { color: var(--red); }
+    #statusbar.busy  { color: var(--amber); }
+
+    /* ── CONTROLS ── */
+    select, input[type="text"], input[type="number"], textarea {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: 'Share Tech Mono', monospace;
+      padding: 5px 9px;
+      border-radius: 4px;
+      font-size: 0.88rem;
+    }
+    select:focus, input:focus, textarea:focus {
+      outline: none;
+      border-color: var(--teal);
+    }
+    button {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: 'Share Tech Mono', monospace;
+      padding: 5px 13px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.88rem;
+      transition: border-color .15s, color .15s;
+      white-space: nowrap;
+    }
+    button:hover  { border-color: var(--teal); color: var(--teal); }
+    button.primary { background: var(--teal2); border-color: var(--teal); color: #fff; }
+    button.primary:hover { background: var(--teal); }
+
+    /* ── MAIN ── */
+    main { max-width: 920px; margin: 0 auto; padding: 20px; }
+
+    #empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--dim);
+    }
+    #empty-state h2 {
+      font-family: 'Special Elite', serif;
+      font-size: 1.6rem;
+      color: var(--teal);
+      margin-bottom: 12px;
+    }
+    #empty-state p { line-height: 1.8; }
+
+    /* ── SHEET ── */
+    .sheet { display: grid; gap: 18px; }
+
+    .sec {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 16px;
+    }
+    .sec h3 {
+      font-family: 'Special Elite', serif;
+      color: var(--teal);
+      font-size: 0.8rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 7px;
+    }
+
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+    .grid4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; }
+
+    .field { display: flex; flex-direction: column; gap: 4px; }
+    .field label {
+      font-size: 0.72rem;
+      color: var(--dim);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .field input, .field select, .field textarea { width: 100%; }
+    textarea { resize: vertical; min-height: 70px; }
+    .note { font-size: 0.75rem; color: var(--dim); margin-top: 4px; }
+
+    /* ── ATTRIBUTES ── */
+    .attr-box {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 12px;
+      text-align: center;
+    }
+    .attr-box .alabel {
+      font-size: 0.7rem;
+      color: var(--teal);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 8px;
+    }
+    .attr-val {
+      font-size: 2.2rem;
+      font-weight: bold;
+      color: var(--amber);
+      line-height: 1;
+    }
+    .dots {
+      display: flex;
+      justify-content: center;
+      gap: 5px;
+      margin-top: 8px;
+    }
+    .dot {
+      width: 15px; height: 15px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      cursor: pointer;
+      transition: border-color .12s, background .12s;
+    }
+    .dot.on  { background: var(--amber); border-color: var(--amber); }
+    .dot:hover { border-color: var(--amber); }
+
+    /* ── SKILLS ── */
+    .skills-wrap { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+    .skill-group h4 {
+      font-size: 0.7rem;
+      color: var(--teal);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .skill-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 7px;
+      gap: 6px;
+    }
+    .skill-name { font-size: 0.82rem; }
+    .sdots { display: flex; gap: 3px; }
+    .sdot {
+      width: 11px; height: 11px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: border-color .12s, background .12s;
+    }
+    .sdot.on  { background: var(--teal); border-color: var(--teal); }
+    .sdot:hover { border-color: var(--teal); }
+
+    /* ── CONDITIONS ── */
+    .cond-row { display: flex; flex-wrap: wrap; gap: 8px; }
+    .cond {
+      display: flex; align-items: center; gap: 7px;
+      padding: 7px 13px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.88rem;
+      transition: all .15s;
+    }
+    .cond:hover { border-color: var(--red); }
+    .cond.on  { border-color: var(--red); background: rgba(230,57,70,.14); color: var(--red); }
+    .cbox {
+      width: 13px; height: 13px;
+      border: 2px solid currentColor;
+      border-radius: 2px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 9px;
+    }
+
+    /* ── LUCK ── */
+    .luck-wrap { display: flex; flex-wrap: wrap; gap: 7px; }
+    .lbubble {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.78rem;
+      cursor: pointer;
+      transition: all .15s;
+    }
+    .lbubble.avail { border-color: var(--green); color: var(--green); }
+    .lbubble.used  { opacity: 0.3; text-decoration: line-through; }
+
+    /* ── XP ── */
+    .xp-wrap { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
+    .xpbox {
+      width: 29px; height: 29px;
+      border: 2px solid var(--border);
+      border-radius: 3px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px;
+      transition: all .15s;
+    }
+    .xpbox.on { border-color: var(--amber); color: var(--amber); }
+    .xpbox:hover { border-color: var(--amber); }
+
+    /* ── MODAL ── */
+    .overlay {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,.72);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .overlay.open { display: flex; }
+    .modal {
+      background: var(--bg2);
+      border: 1px solid var(--teal);
+      border-radius: 8px;
+      padding: 24px;
+      width: 100%;
+      max-width: 500px;
+    }
+    .modal h2 {
+      font-family: 'Special Elite', serif;
+      color: var(--teal);
+      margin-bottom: 18px;
+      letter-spacing: 2px;
+    }
+    .modal .field { margin-bottom: 13px; }
+    .mbtn-row {
+      display: flex; gap: 8px;
+      justify-content: flex-end;
+      margin-top: 18px;
+    }
+    .modal code {
+      background: var(--bg3);
+      padding: 1px 5px;
+      border-radius: 3px;
+      font-size: 0.82rem;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      .grid4, .skills-wrap { grid-template-columns: repeat(2,1fr); }
+      .grid3 { grid-template-columns: 1fr; }
+      .grid2 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">TALES FROM THE <span>LOOP</span></div>
+  <div class="header-right">
+    <select id="char-sel">
+      <option value="">— Vyber postavu —</option>
+    </select>
+    <button onclick="openNewChar()">+ Nová</button>
+    <button id="save-btn" class="primary" style="display:none" onclick="saveChar()">💾 Uložit</button>
+    <button onclick="openSettings()">⚙</button>
+  </div>
+</header>
+
+<div id="statusbar">Pro ukládání nastav GitHub v ⚙ Nastavení.</div>
+
+<main>
+  <!-- Empty state -->
+  <div id="empty-state">
+    <h2>⚡ LOOP CHARACTER SYSTEM</h2>
+    <p>
+      Vyber postavu z rozbalovacího menu, nebo vytvoř novou.<br>
+      Změny se ukládají přímo do GitHub repozitáře.<br><br>
+      <span style="color:var(--teal)">► Začni v ⚙ Nastavení</span>
+    </p>
+  </div>
+
+  <!-- Sheet -->
+  <div id="sheet" style="display:none">
+    <div class="sheet">
+
+      <!-- Identifikace -->
+      <div class="sec">
+        <h3>Identifikace</h3>
+        <div class="grid3">
+          <div class="field">
+            <label>Jméno</label>
+            <input type="text" id="f-name">
+          </div>
+          <div class="field">
+            <label>Věk</label>
+            <input type="number" id="f-age" min="10" max="15" oninput="updateLuck()">
+          </div>
+          <div class="field">
+            <label>Archetype</label>
+            <select id="f-archetype">
+              <option>The Bookworm</option>
+              <option>The Hick</option>
+              <option>The Jock</option>
+              <option>The Nerd</option>
+              <option>The Popular Kid</option>
+              <option>The Rocker</option>
+              <option>The Troublemaker</option>
+              <option>The New Kid</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Atributy -->
+      <div class="sec">
+        <h3>Atributy</h3>
+        <div class="grid4" id="attr-grid">
+          <!-- rendered by JS -->
+        </div>
+      </div>
+
+      <!-- Dovednosti -->
+      <div class="sec">
+        <h3>Dovednosti</h3>
+        <div class="skills-wrap" id="skills-wrap">
+          <!-- rendered by JS -->
+        </div>
+      </div>
+
+      <!-- Stav -->
+      <div class="sec">
+        <h3>Stav postavy</h3>
+        <div style="margin-bottom:16px">
+          <div class="field" style="margin-bottom:10px">
+            <label>Podmínky</label>
+          </div>
+          <div class="cond-row" id="cond-row">
+            <div class="cond" data-c="upset"     onclick="toggleCond(this)"><div class="cbox"></div>Upset</div>
+            <div class="cond" data-c="scared"    onclick="toggleCond(this)"><div class="cbox"></div>Scared</div>
+            <div class="cond" data-c="exhausted" onclick="toggleCond(this)"><div class="cbox"></div>Exhausted</div>
+            <div class="cond" data-c="injured"   onclick="toggleCond(this)"><div class="cbox"></div>Injured</div>
+            <div class="cond" data-c="broken"    onclick="toggleCond(this)"><div class="cbox"></div>Broken</div>
+          </div>
+        </div>
+        <div>
+          <div class="field" style="margin-bottom:10px">
+            <label>Luck Points <span style="color:var(--dim)">(= 15 − věk)</span></label>
+          </div>
+          <div class="luck-wrap" id="luck-wrap"></div>
+        </div>
+      </div>
+
+      <!-- Osobnost -->
+      <div class="sec">
+        <h3>Osobnost</h3>
+        <div class="grid2" style="margin-bottom:12px">
+          <div class="field">
+            <label>Drive — proč chodíš na dobrodružství</label>
+            <textarea id="f-drive" rows="2"></textarea>
+          </div>
+          <div class="field">
+            <label>Anchor — co tě drží v bezpečí</label>
+            <textarea id="f-anchor" rows="2"></textarea>
+          </div>
+        </div>
+        <div class="grid2">
+          <div class="field">
+            <label>Problem — tvůj problém doma</label>
+            <textarea id="f-problem" rows="2"></textarea>
+          </div>
+          <div class="field">
+            <label>Pride — tvá hrdost</label>
+            <textarea id="f-pride" rows="2"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- Vztahy -->
+      <div class="sec">
+        <h3>Vztahy</h3>
+        <div class="field">
+          <textarea id="f-rels" rows="4" placeholder="Vztahy k ostatním dětem a NPC..."></textarea>
+        </div>
+      </div>
+
+      <!-- Vybavení & Hideout -->
+      <div class="sec">
+        <h3>Vybavení &amp; Hideout</h3>
+        <div class="grid2">
+          <div class="field">
+            <label>Předměty u sebe</label>
+            <textarea id="f-items" rows="3" placeholder="Co máš v kapsách a batohu..."></textarea>
+          </div>
+          <div class="field">
+            <label>Hideout — vaše skrýš</label>
+            <textarea id="f-hideout" rows="3" placeholder="Popis skrýše a co tam schováváte..."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- XP -->
+      <div class="sec">
+        <h3>Zkušenosti (XP)</h3>
+        <div class="xp-wrap" id="xp-wrap"></div>
+      </div>
+
+      <!-- Poznámky -->
+      <div class="sec">
+        <h3>Poznámky</h3>
+        <div class="field">
+          <textarea id="f-notes" rows="5" placeholder="Session notes, tajemství, nápady..."></textarea>
+        </div>
+      </div>
+
+    </div><!-- .sheet -->
+  </div><!-- #sheet -->
+</main>
+
+<!-- ─── SETTINGS MODAL ─── -->
+<div class="overlay" id="settings-overlay">
+  <div class="modal">
+    <h2>⚙ Nastavení GitHub</h2>
+    <div class="field">
+      <label>GitHub Owner (tvůj username)</label>
+      <input type="text" id="s-owner" placeholder="username">
+    </div>
+    <div class="field">
+      <label>Název repozitáře</label>
+      <input type="text" id="s-repo" placeholder="tftl-characters">
+    </div>
+    <div class="field">
+      <label>Větev (branch)</label>
+      <input type="text" id="s-branch" placeholder="main">
+    </div>
+    <div class="field">
+      <label>Personal Access Token</label>
+      <input type="text" id="s-token" placeholder="ghp_...">
+      <p class="note">
+        Token potřebuje oprávnění <code>Contents → Read &amp; Write</code>.<br>
+        Uloženo pouze v localStorage tvého prohlížeče, nikam neodesíláno.<br>
+        <a href="https://github.com/settings/tokens?type=beta" target="_blank" style="color:var(--teal)">→ Vytvořit Fine-grained token</a>
+      </p>
+    </div>
+    <div class="mbtn-row">
+      <button onclick="closeSettings()">Zrušit</button>
+      <button class="primary" onclick="saveSettings()">Uložit &amp; načíst postavy</button>
+    </div>
+  </div>
+</div>
+
+<!-- ─── NEW CHARACTER MODAL ─── -->
+<div class="overlay" id="newchar-overlay">
+  <div class="modal">
+    <h2>+ Nová postava</h2>
+    <div class="field">
+      <label>Jméno postavy</label>
+      <input type="text" id="nc-name" placeholder="např. Jerry">
+      <p class="note">Soubor se uloží jako <code>characters/{jméno}.json</code></p>
+    </div>
+    <div class="mbtn-row">
+      <button onclick="closeNewChar()">Zrušit</button>
+      <button class="primary" onclick="createChar()">Vytvořit</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════════
+//  CONFIG
+// ══════════════════════════════════════════════════
+let cfg = { owner:'', repo:'', branch:'main', token:'' };
+
+function loadCfg() {
+  try { cfg = { ...cfg, ...JSON.parse(localStorage.getItem('tftl-cfg') || '{}') }; } catch(e){}
+}
+function saveCfg() {
+  localStorage.setItem('tftl-cfg', JSON.stringify(cfg));
+}
+
+// ══════════════════════════════════════════════════
+//  STATUS
+// ══════════════════════════════════════════════════
+function status(msg, cls='') {
+  const el = document.getElementById('statusbar');
+  el.textContent = msg;
+  el.className = cls;
+}
+
+// ══════════════════════════════════════════════════
+//  GITHUB API
+// ══════════════════════════════════════════════════
+function ghHeaders() {
+  const h = { 'Accept':'application/vnd.github+json', 'X-GitHub-Api-Version':'2022-11-28' };
+  if (cfg.token) h['Authorization'] = `Bearer ${cfg.token}`;
+  return h;
+}
+
+async function ghGet(path) {
+  const r = await fetch(`https://api.github.com/repos/${cfg.owner}/${cfg.repo}${path}`, { headers: ghHeaders() });
+  return r;
+}
+
+async function ghPut(path, body) {
+  const r = await fetch(`https://api.github.com/repos/${cfg.owner}/${cfg.repo}${path}`, {
+    method: 'PUT',
+    headers: { ...ghHeaders(), 'Content-Type':'application/json' },
+    body: JSON.stringify(body)
+  });
+  return r;
+}
+
+// UTF-8 safe base64
+function toB64(str) {
+  return btoa(unescape(encodeURIComponent(str)));
+}
+function fromB64(b64) {
+  return decodeURIComponent(escape(atob(b64)));
+}
+
+async function listChars() {
+  const r = await ghGet(`/contents/characters?ref=${cfg.branch}`);
+  if (r.status === 404) return [];
+  if (!r.ok) { const e = await r.json(); throw new Error(e.message); }
+  const files = await r.json();
+  return files.filter(f => f.name.endsWith('.json')).map(f => f.name.replace('.json',''));
+}
+
+async function fetchChar(slug) {
+  const r = await ghGet(`/contents/characters/${slug}.json?ref=${cfg.branch}`);
+  if (!r.ok) return null;
+  const d = await r.json();
+  return { data: JSON.parse(fromB64(d.content.replace(/\n/g,''))), sha: d.sha };
+}
+
+async function writeChar(slug, data, sha, msg) {
+  const content = toB64(JSON.stringify(data, null, 2));
+  const body = { message: msg, content, branch: cfg.branch };
+  if (sha) body.sha = sha;
+  const r = await ghPut(`/contents/characters/${slug}.json`, body);
+  return r;
+}
+
+// ══════════════════════════════════════════════════
+//  STATE
+// ══════════════════════════════════════════════════
+let curData = null;
+let curSha  = null;
+let curSlug = null;
+
+const ATTRS  = ['body','tech','heart','mind'];
+const SKILLS = {
+  body:  ['Sneak','Force','Move'],
+  tech:  ['Tinker','Program','Calculate'],
+  heart: ['Contact','Charm','Lead'],
+  mind:  ['Investigate','Comprehend','Empathize']
+};
+
+function defaultChar(name='') {
+  return {
+    name, age:12, archetype:'The Bookworm',
+    attrs: { body:2, tech:2, heart:2, mind:2 },
+    skills: {
+      sneak:0,force:0,move:0,
+      tinker:0,program:0,calculate:0,
+      contact:0,charm:0,lead:0,
+      investigate:0,comprehend:0,empathize:0
+    },
+    conditions: { upset:false, scared:false, exhausted:false, injured:false, broken:false },
+    luckUsed:[],
+    drive:'', anchor:'', problem:'', pride:'',
+    relationships:'', items:'', hideout:'',
+    xp:0, notes:''
+  };
+}
+
+// ══════════════════════════════════════════════════
+//  RENDER HELPERS
+// ══════════════════════════════════════════════════
+
+// — Attributes —
+function renderAttrs() {
+  const grid = document.getElementById('attr-grid');
+  grid.innerHTML = '';
+  ATTRS.forEach(a => {
+    const val = curData.attrs[a] || 2;
+    const box = document.createElement('div');
+    box.className = 'attr-box';
+    box.innerHTML = `<span class="alabel">${a.toUpperCase()}</span><div class="attr-val" id="av-${a}">${val}</div><div class="dots" id="ad-${a}"></div>`;
+    grid.appendChild(box);
+    renderAttrDots(a, val);
+  });
+}
+
+function renderAttrDots(a, val) {
+  const c = document.getElementById(`ad-${a}`);
+  c.innerHTML = '';
+  for (let i=1;i<=5;i++) {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i<=val?' on':'');
+    d.onclick = () => setAttr(a, i);
+    c.appendChild(d);
+  }
+  document.getElementById(`av-${a}`).textContent = val;
+}
+
+function setAttr(a, v) {
+  if(!curData) return;
+  curData.attrs[a] = v;
+  renderAttrDots(a, v);
+}
+
+// — Skills —
+function renderSkills() {
+  const wrap = document.getElementById('skills-wrap');
+  wrap.innerHTML = '';
+  for (const [attr, skills] of Object.entries(SKILLS)) {
+    const grp = document.createElement('div');
+    grp.className = 'skill-group';
+    grp.innerHTML = `<h4>${attr.toUpperCase()}</h4>`;
+    skills.forEach(name => {
+      const key = name.toLowerCase();
+      const val = (curData.skills[key] || 0);
+      const row = document.createElement('div');
+      row.className = 'skill-row';
+      row.innerHTML = `<span class="skill-name">${name}</span><div class="sdots" id="sd-${key}"></div>`;
+      grp.appendChild(row);
+    });
+    wrap.appendChild(grp);
+    skills.forEach(name => renderSkillDots(name.toLowerCase(), curData.skills[name.toLowerCase()]||0));
+  }
+}
+
+function renderSkillDots(key, val) {
+  const c = document.getElementById(`sd-${key}`);
+  if(!c) return;
+  c.innerHTML = '';
+  for(let i=1;i<=5;i++){
+    const d = document.createElement('div');
+    d.className = 'sdot' + (i<=val?' on':'');
+    d.onclick = () => { if(!curData) return; curData.skills[key] = (curData.skills[key]===i?0:i); renderSkillDots(key, curData.skills[key]); };
+    c.appendChild(d);
+  }
+}
+
+// — Conditions —
+function renderConds() {
+  document.querySelectorAll('.cond').forEach(el => {
+    const c = el.dataset.c;
+    const on = curData.conditions[c];
+    el.classList.toggle('on', !!on);
+    el.querySelector('.cbox').textContent = on ? '✕' : '';
+  });
+}
+
+function toggleCond(el) {
+  const c = el.dataset.c;
+  el.classList.toggle('on');
+  const on = el.classList.contains('on');
+  el.querySelector('.cbox').textContent = on ? '✕' : '';
+  if(curData) curData.conditions[c] = on;
+}
+
+// — Luck —
+function updateLuck() {
+  const age = parseInt(document.getElementById('f-age').value)||12;
+  const max = 15 - age;
+  if(curData) curData.luckUsed = (curData.luckUsed||[]).filter(l=>l<max);
+  renderLuck(max, curData ? curData.luckUsed : []);
+}
+
+function renderLuck(max, used) {
+  const w = document.getElementById('luck-wrap');
+  w.innerHTML = '';
+  for(let i=0;i<max;i++){
+    const b = document.createElement('div');
+    const isUsed = (used||[]).includes(i);
+    b.className = 'lbubble ' + (isUsed?'used':'avail');
+    b.textContent = i+1;
+    b.onclick = () => {
+      if(!curData) return;
+      const lu = curData.luckUsed||[];
+      const idx = lu.indexOf(i);
+      if(idx>=0) lu.splice(idx,1); else lu.push(i);
+      curData.luckUsed = lu;
+      renderLuck(max, lu);
+    };
+    w.appendChild(b);
+  }
+}
+
+// — XP —
+function renderXP(xp) {
+  const w = document.getElementById('xp-wrap');
+  w.innerHTML = '';
+  for(let i=0;i<10;i++){
+    const b = document.createElement('div');
+    b.className = 'xpbox' + (i<xp?' on':'');
+    b.textContent = i<xp?'✓':'';
+    b.onclick = () => {
+      if(!curData) return;
+      curData.xp = (curData.xp===i+1)?i:i+1;
+      renderXP(curData.xp);
+    };
+    w.appendChild(b);
+  }
+}
+
+// ══════════════════════════════════════════════════
+//  LOAD CHAR INTO SHEET
+// ══════════════════════════════════════════════════
+function displayChar(data) {
+  curData = data;
+  document.getElementById('f-name').value       = data.name||'';
+  document.getElementById('f-age').value        = data.age||12;
+  document.getElementById('f-archetype').value  = data.archetype||'The Bookworm';
+  document.getElementById('f-drive').value      = data.drive||'';
+  document.getElementById('f-anchor').value     = data.anchor||'';
+  document.getElementById('f-problem').value    = data.problem||'';
+  document.getElementById('f-pride').value      = data.pride||'';
+  document.getElementById('f-rels').value       = data.relationships||'';
+  document.getElementById('f-items').value      = data.items||'';
+  document.getElementById('f-hideout').value    = data.hideout||'';
+  document.getElementById('f-notes').value      = data.notes||'';
+
+  renderAttrs();
+  renderSkills();
+  renderConds();
+  renderLuck(15-(data.age||12), data.luckUsed||[]);
+  renderXP(data.xp||0);
+
+  document.getElementById('empty-state').style.display = 'none';
+  document.getElementById('sheet').style.display = 'block';
+  document.getElementById('save-btn').style.display = '';
+}
+
+// ══════════════════════════════════════════════════
+//  COLLECT SHEET → DATA
+// ══════════════════════════════════════════════════
+function collectData() {
+  if(!curData) return null;
+  return {
+    ...curData,
+    name:          document.getElementById('f-name').value,
+    age:           parseInt(document.getElementById('f-age').value)||12,
+    archetype:     document.getElementById('f-archetype').value,
+    drive:         document.getElementById('f-drive').value,
+    anchor:        document.getElementById('f-anchor').value,
+    problem:       document.getElementById('f-problem').value,
+    pride:         document.getElementById('f-pride').value,
+    relationships: document.getElementById('f-rels').value,
+    items:         document.getElementById('f-items').value,
+    hideout:       document.getElementById('f-hideout').value,
+    notes:         document.getElementById('f-notes').value,
+  };
+}
+
+// ══════════════════════════════════════════════════
+//  CHARACTER SELECT
+// ══════════════════════════════════════════════════
+document.getElementById('char-sel').addEventListener('change', async (e) => {
+  const slug = e.target.value;
+  if(!slug) return;
+  status(`Načítám ${slug}…`, 'busy');
+  try {
+    const res = await fetchChar(slug);
+    if(!res) { status(`Postava ${slug} nenalezena.`, 'err'); return; }
+    curSlug = slug;
+    curSha  = res.sha;
+    displayChar(res.data);
+    status(`✓ ${res.data.name || slug} načten/a.`, 'ok');
+  } catch(err) { status(`Chyba: ${err.message}`, 'err'); }
+});
+
+// ══════════════════════════════════════════════════
+//  SAVE
+// ══════════════════════════════════════════════════
+async function saveChar() {
+  if(!curData || !curSlug) return;
+  if(!cfg.token) { status('Chybí GitHub token — nastav ho v ⚙ Nastavení.', 'err'); return; }
+  const data = collectData();
+  status('Ukládám…', 'busy');
+  try {
+    const r = await writeChar(curSlug, data, curSha, `Update: ${data.name}`);
+    if(r.ok) {
+      const rd = await r.json();
+      curSha  = rd.content.sha;
+      curData = data;
+      status(`✓ ${data.name} uložen/a do repozitáře.`, 'ok');
+    } else {
+      const e = await r.json();
+      status(`Chyba: ${e.message}`, 'err');
+    }
+  } catch(err) { status(`Chyba: ${err.message}`, 'err'); }
+}
+
+// ══════════════════════════════════════════════════
+//  LOAD CHAR LIST
+// ══════════════════════════════════════════════════
+async function loadCharList() {
+  if(!cfg.owner || !cfg.repo) return;
+  status('Načítám seznam postav…', 'busy');
+  try {
+    const chars = await listChars();
+    const sel = document.getElementById('char-sel');
+    const prev = sel.value;
+    sel.innerHTML = '<option value="">— Vyber postavu —</option>';
+    chars.forEach(name => {
+      const o = document.createElement('option');
+      o.value = name; o.textContent = name;
+      sel.appendChild(o);
+    });
+    if(chars.includes(prev)) sel.value = prev;
+    status(chars.length ? `✓ ${chars.length} postav načteno.` : 'Repozitář OK. Žádné postavy zatím — vytvoř novou!', chars.length?'ok':'');
+  } catch(err) { status(`Chyba: ${err.message}`, 'err'); }
+}
+
+// ══════════════════════════════════════════════════
+//  NEW CHARACTER
+// ══════════════════════════════════════════════════
+function openNewChar()  { document.getElementById('newchar-overlay').classList.add('open'); document.getElementById('nc-name').focus(); }
+function closeNewChar() { document.getElementById('newchar-overlay').classList.remove('open'); }
+
+async function createChar() {
+  const rawName = document.getElementById('nc-name').value.trim();
+  if(!rawName) return;
+  if(!cfg.token) { status('Chybí GitHub token.', 'err'); closeNewChar(); return; }
+
+  const slug = rawName.toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')  // strip diacritics
+    .replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'');
+
+  const newData = defaultChar(rawName);
+  status(`Vytvářím ${rawName}…`, 'busy');
+  closeNewChar();
+
+  try {
+    const r = await writeChar(slug, newData, null, `Nová postava: ${rawName}`);
+    if(r.ok) {
+      const rd = await r.json();
+      curSlug = slug;
+      curSha  = rd.content.sha;
+      displayChar(newData);
+      await loadCharList();
+      document.getElementById('char-sel').value = slug;
+      status(`✓ Postava ${rawName} vytvořena.`, 'ok');
+    } else {
+      const e = await r.json();
+      status(`Chyba: ${e.message}`, 'err');
+    }
+  } catch(err) { status(`Chyba: ${err.message}`, 'err'); }
+}
+
+// Enter key in new char modal
+document.getElementById('nc-name').addEventListener('keydown', e => { if(e.key==='Enter') createChar(); });
+
+// ══════════════════════════════════════════════════
+//  SETTINGS
+// ══════════════════════════════════════════════════
+function openSettings() {
+  document.getElementById('s-owner').value  = cfg.owner;
+  document.getElementById('s-repo').value   = cfg.repo;
+  document.getElementById('s-branch').value = cfg.branch;
+  document.getElementById('s-token').value  = cfg.token;
+  document.getElementById('settings-overlay').classList.add('open');
+}
+function closeSettings() { document.getElementById('settings-overlay').classList.remove('open'); }
+
+async function saveSettings() {
+  cfg.owner  = document.getElementById('s-owner').value.trim();
+  cfg.repo   = document.getElementById('s-repo').value.trim();
+  cfg.branch = document.getElementById('s-branch').value.trim() || 'main';
+  cfg.token  = document.getElementById('s-token').value.trim();
+  saveCfg();
+  closeSettings();
+  await loadCharList();
+}
+
+// Close modals on overlay click
+document.getElementById('settings-overlay').addEventListener('click', e => { if(e.target===e.currentTarget) closeSettings(); });
+document.getElementById('newchar-overlay').addEventListener('click',  e => { if(e.target===e.currentTarget) closeNewChar(); });
+
+// ══════════════════════════════════════════════════
+//  KEYBOARD SHORTCUTS
+// ══════════════════════════════════════════════════
+document.addEventListener('keydown', e => {
+  if((e.ctrlKey||e.metaKey) && e.key==='s') { e.preventDefault(); saveChar(); }
+});
+
+// ══════════════════════════════════════════════════
+//  INIT
+// ══════════════════════════════════════════════════
+loadCfg();
+if(cfg.owner && cfg.repo) loadCharList();
+</script>
+</body>
+</html>
