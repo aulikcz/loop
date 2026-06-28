@@ -1,26 +1,26 @@
 {
-  "name": "Simon",
-  "age": 12,
-  "archetype": "The Bookworm",
+  "name": "Simon (Smrádek) Evers",
+  "age": 14,
+  "archetype": "The New Kid",
   "attrs": {
-    "body": 2,
-    "tech": 2,
+    "body": 4,
+    "tech": 3,
     "heart": 2,
-    "mind": 2
+    "mind": 5
   },
   "skills": {
-    "sneak": 0,
+    "sneak": 4,
     "force": 0,
-    "move": 0,
-    "tinker": 0,
+    "move": 1,
+    "tinker": 3,
     "program": 0,
-    "calculate": 0,
+    "calculate": 1,
     "contact": 0,
-    "charm": 0,
+    "charm": 1,
     "lead": 0,
-    "investigate": 0,
-    "comprehend": 0,
-    "empathize": 0
+    "investigate": 3,
+    "comprehend": 2,
+    "empathize": 1
   },
   "conditions": {
     "upset": false,
@@ -29,14 +29,16 @@
     "injured": false,
     "broken": false
   },
-  "luckUsed": [],
-  "drive": "",
-  "anchor": "",
-  "problem": "",
-  "pride": "",
-  "relationships": "",
-  "items": "",
-  "hideout": "",
-  "xp": 0,
-  "notes": ""
+  "luckUsed": [
+    0
+  ],
+  "drive": "útěk od kruté reality",
+  "anchor": "Mr. Seelie - majitel skládky a vrakoviště, starý muž, který je rád že si v jeho věku může s někým povídat v nudné práci. Oblíbil si mě protože ho často navštěvuji a mám zájem o jeho příběhy z mládí. Ví že si bez jeho dovolení kradu součástky ze skládky, ale i tak mě nechá.",
+  "problem": "Můj otec je násilný alkoholik a vybíjí si stres na mě",
+  "pride": "Nemusím čelit svým problémům když se před nimi zvládnu schovat (Sneak) (USED)",
+  "relationships": "Thomas Tennant (11) - čas od času mu seženu nějaký součástky a on mi pomáhá pochopit techniku (Občas dokáže být docela otravnej)\n\nStatic - (Sebastian) (13) - Moc se spolu nebavíme, neutrální vztah\n\nStela Göringa (13) - vážím si jí, naučila mě používat makeup kterým schovávám modřiny, nosí zrcátko\n\nMaria (Maja) Forsberg (14) - potkávám jí v horší čtvrti poblíž skládky ale vyhýbám se jí. Závidím jí jak moc má volnosti a jak si dokáže prosadit své. Závidím jí její způsob života a její odvahu říct jak se cítí a co si myslí.\n\nSoused Mr. Karlsson - půjčuje mi nářadí, protože mu tvrdím (lžu), že mě pro něj poslal otec. Dokud vše vrátím včas tak to s tátou neřeší.\n",
+  "items": "Multitool - kleštičky, nožík, šroubovák, pilník, háček ",
+  "hideout": "Stará opuštěná trafostanice",
+  "xp": 2,
+  "notes": "Dnes 5 - otec ; 4 - sny"
 }
