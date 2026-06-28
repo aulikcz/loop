@@ -1,12 +1,12 @@
 {
   "name": "Pepa",
-  "age": 12,
-  "archetype": "The Bookworm",
+  "age": 15,
+  "archetype": "The Troublemaker",
   "attrs": {
-    "body": 2,
-    "tech": 2,
-    "heart": 2,
-    "mind": 2
+    "body": 5,
+    "tech": 5,
+    "heart": 5,
+    "mind": 5
   },
   "skills": {
     "sneak": 0,
@@ -37,6 +37,6 @@
   "relationships": "",
   "items": "",
   "hideout": "",
-  "xp": 0,
+  "xp": 6,
   "notes": ""
 }
