@@ -1,7 +1,7 @@
 {
   "name": "Static",
-  "age": 12,
-  "archetype": "The Bookworm",
+  "age": 14,
+  "archetype": "The Rocker",
   "attrs": {
     "body": 2,
     "tech": 2,
@@ -12,7 +12,7 @@
     "sneak": 0,
     "force": 0,
     "move": 0,
-    "tinker": 0,
+    "tinker": 3,
     "program": 0,
     "calculate": 0,
     "contact": 0,
