@@ -1,26 +1,26 @@
 {
-  "name": "Stella",
-  "age": 12,
-  "archetype": "The Bookworm",
+  "name": "Stela Göringa",
+  "age": 14,
+  "archetype": "The Popular Kid",
   "attrs": {
-    "body": 2,
+    "body": 3,
     "tech": 2,
-    "heart": 2,
-    "mind": 2
+    "heart": 5,
+    "mind": 4
   },
   "skills": {
-    "sneak": 0,
+    "sneak": 3,
     "force": 0,
-    "move": 0,
+    "move": 2,
     "tinker": 0,
     "program": 0,
     "calculate": 0,
-    "contact": 0,
-    "charm": 0,
-    "lead": 0,
-    "investigate": 0,
-    "comprehend": 0,
-    "empathize": 0
+    "contact": 2,
+    "charm": 3,
+    "lead": 2,
+    "investigate": 1,
+    "comprehend": 2,
+    "empathize": 1
   },
   "conditions": {
     "upset": false,
@@ -30,13 +30,13 @@
     "broken": false
   },
   "luckUsed": [],
-  "drive": "",
-  "anchor": "",
-  "problem": "",
-  "pride": "",
-  "relationships": "",
-  "items": "",
-  "hideout": "",
+  "drive": "HLedání sounáležitosti",
+  "anchor": "Babička Agne",
+  "problem": "Hledání uznání od druhých - rodiče",
+  "pride": "Nadhled - empathize",
+  "relationships": "Sebastian - crush\nThomas - vnímám určité napětí - nebaví se s holkami - neutrální\nSimon - vím o rodinných vztazích - pozitivní\nMaya - chodíme spolu do kroužku malování - kámošky",
+  "items": "Zrcátko - iconic item",
+  "hideout": "Opuštěná trafostanice",
   "xp": 0,
-  "notes": ""
+  "notes": "-"
 }
