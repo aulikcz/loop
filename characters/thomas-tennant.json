@@ -29,7 +29,9 @@
     "injured": false,
     "broken": false
   },
-  "luckUsed": [],
+  "luckUsed": [
+    1
+  ],
   "drive": "Objevit nové technologie",
   "anchor": "Učitel IT - Niklas Lundell",
   "problem": "Rodiče se neustále hádaj",
