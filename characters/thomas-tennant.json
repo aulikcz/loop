@@ -1,7 +1,7 @@
 {
   "name": "Thomas Tennant",
   "age": 13,
-  "archetype": "",
+  "archetype": "The Bookworm",
   "attrs": {
     "body": 2,
     "tech": 5,
@@ -29,7 +29,9 @@
     "injured": false,
     "broken": false
   },
-  "luckUsed": [],
+  "luckUsed": [
+    1
+  ],
   "drive": "Objevit nové technologie",
   "anchor": "Učitel IT - Niklas Lundell",
   "problem": "Rodiče se neustále hádaj",
@@ -37,6 +39,6 @@
   "relationships": "Sebastian \"Statik\" - Má zajímavý přehrávač. Přehrává teď zajímavé věci občas. Díky mé anténě. Od té doby se bavíme více.\n\nStela Göringa - Snaží se semnou bavit. \n\nSimon - Smrdí, ale je fajn. Shání mi náhradní díly k mojí klávesnici.\n\nMaria \"Maja\" - Dělá problémy a sprejuje nazdi. Nesnaží se semnou bavit.\n\nPelle - nový spolužák, je celkem oblíbený, \n\nJosef - Kamarád geek, vždycky ví o všech novinkách které vyjdou.",
   "items": "Příruční klávesnice + 2d6\n",
   "hideout": "Opuštěná budova trafostanice",
-  "xp": 3,
+  "xp": 7,
   "notes": "Datum narození 1.3. \nTáta: Gregory - pracuje v přístavu\nMáma: Magdáléna - pracuje v knihovně\nAlergik"
 }
