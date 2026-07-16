@@ -18,15 +18,15 @@
     "contact": 0,
     "charm": 0,
     "lead": 0,
-    "investigate": 1,
+    "investigate": 2,
     "comprehend": 1,
     "empathize": 2
   },
   "conditions": {
     "upset": false,
-    "scared": true,
-    "exhausted": false,
-    "injured": true,
+    "scared": false,
+    "exhausted": true,
+    "injured": false,
     "broken": false
   },
   "luckUsed": [
@@ -35,10 +35,10 @@
   "drive": "Najít něco, abych neměl jen hudbu (vzpomínky, malou skupinu kamarádů, dobrodružství)",
   "anchor": "Prodavač hudby - Ulf",
   "problem": "Jsem bez domova",
-  "pride": "Čtu mezi řádky - Investigate - USED",
+  "pride": "Čtu mezi řádky - Investigate",
   "relationships": "Maria \"Maja\" - Když jsem pomáhal u Ulfa, jak sprejovala na zeď, načapali jsme jí, ale přišla mi docela cool, víc jsme se ještě nebavili - Domees - Mírně pozitivní vztah\n\nStela - Popular kid - Omluvil jsem se - Dobby - neutrál?\n\nSimon \"Smrádek\" - Weirdo - také mimo společnost - Brambor - Lehce kladný\n\nThomas Tennat - Computer Geek - Opraven/Upraven přehrávač - Walker - Kladný - Zná mě\n\n",
   "items": "Zapalovač - Charm - ICONIC ITEM +2",
   "hideout": "Opuštěná trafostanice",
-  "xp": 4,
+  "xp": 2,
   "notes": "Přehrávač - chytá/ruší signál, je hlasitý. Od Ulfa. Thomas Opravil. Bohužel při problémech ve WildLife klubu jsem ho použil\n\nPřed půl rokem, poté co se rodiče rozvedli, jsem se s mámou přestěhoval. Na bývalé škole, jsem měl svých pár kamarádů, teď tomu tak není. Před rozvodem se rodiče hodně hádali a můj únik z reality byla a je hudba.\nMáma má od přestěhování problém najít stálou práci. Já jsem občas vypomáhal v krámku s hudbou, kde jsem se seznámil s Ulfem, který mě jako jediný dospělý podporuje a chápe."
 }
