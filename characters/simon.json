@@ -19,14 +19,14 @@
     "charm": 1,
     "lead": 0,
     "investigate": 3,
-    "comprehend": 2,
+    "comprehend": 3,
     "empathize": 1
   },
   "conditions": {
     "upset": false,
-    "scared": false,
+    "scared": true,
     "exhausted": false,
-    "injured": false,
+    "injured": true,
     "broken": false
   },
   "luckUsed": [],
@@ -37,6 +37,6 @@
   "relationships": "Thomas Tennant (11) - čas od času mu seženu nějaký součástky a on mi pomáhá pochopit techniku (Občas dokáže být docela otravnej)\n\nStatic - (Sebastian) (13) - Moc se spolu nebavíme, neutrální vztah\n\nStela Göringa (13) - vážím si jí, naučila mě používat makeup kterým schovávám modřiny, nosí zrcátko\n\nMaria (Maja) Forsberg (14) - potkávám jí v horší čtvrti poblíž skládky ale vyhýbám se jí. Závidím jí jak moc má volnosti a jak si dokáže prosadit své. Závidím jí její způsob života a její odvahu říct jak se cítí a co si myslí.\n\nSoused Mr. Karlsson - půjčuje mi nářadí, protože mu tvrdím (lžu), že mě pro něj poslal otec. Dokud vše vrátím včas tak to s tátou neřeší.\n",
   "items": "Multitool - kleštičky, nožík, šroubovák, pilník, háček ",
   "hideout": "Stará opuštěná trafostanice",
-  "xp": 4,
-  "notes": "Dnes 5 - otec ; 4 - sny"
+  "xp": 3,
+  "notes": "Dnes 1 - otec ; 3 - sny"
 }
