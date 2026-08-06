@@ -10,7 +10,7 @@
   },
   "skills": {
     "sneak": 3,
-    "force": 0,
+    "force": 1,
     "move": 2,
     "tinker": 0,
     "program": 0,
