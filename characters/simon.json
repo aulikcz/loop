@@ -24,9 +24,9 @@
   },
   "conditions": {
     "upset": false,
-    "scared": true,
+    "scared": false,
     "exhausted": false,
-    "injured": true,
+    "injured": false,
     "broken": false
   },
   "luckUsed": [],
