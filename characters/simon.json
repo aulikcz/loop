@@ -23,7 +23,7 @@
     "empathize": 1
   },
   "conditions": {
-    "upset": false,
+    "upset": true,
     "scared": false,
     "exhausted": false,
     "injured": false,
@@ -38,5 +38,5 @@
   "items": "Multitool - kleštičky, nožík, šroubovák, pilník, háček ",
   "hideout": "Stará opuštěná trafostanice",
   "xp": 3,
-  "notes": "Dnes 1 - otec ; 3 - sny"
+  "notes": "Dnes 1 - otec ; 5 - sny"
 }
