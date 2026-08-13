@@ -23,7 +23,7 @@
     "empathize": 1
   },
   "conditions": {
-    "upset": true,
+    "upset": false,
     "scared": false,
     "exhausted": false,
     "injured": false,
@@ -38,5 +38,5 @@
   "items": "Multitool - kleštičky, nožík, šroubovák, pilník, háček ",
   "hideout": "Stará opuštěná trafostanice",
   "xp": 3,
-  "notes": "Dnes 1 - otec ; 5 - sny"
+  "notes": "Dnes 4 - otec ; 5 - sny\n\nJaký den měl doma Simon: - sets Simons mood and casual RP\n6 - Bez problému - Veselý dělám vtípky až trochu bratty\n5 - Táta na mě řval - veselý a kamarádský\n4,3 - Táta mi dal pár facek ale nic hrozného - shovívavý a nedůrazný\n2,1 - Táta mě totálně zmlátil - zamlklý bojácný\n\nHe doesnt remember his dreams, but he finds peace in them (sometimes) - sets how much in scared in action and how much adventurous I am\n1,2-he wakes up begging and crying in a middle of a night - v krizi se bojí, utíká, schovává, zmrzne?\n3,4 - he wakes up in the morning with tears in his eyes - v krizi panikaří, ale reaguje včasně\n5,6 - he wakes up calmly - v krizi reaguje okamžitě a klidně"
 }
