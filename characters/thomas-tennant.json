@@ -24,12 +24,15 @@
   },
   "conditions": {
     "upset": false,
-    "scared": false,
+    "scared": true,
     "exhausted": false,
     "injured": false,
     "broken": false
   },
-  "luckUsed": [],
+  "luckUsed": [
+    1,
+    0
+  ],
   "drive": "Objevit nové technologie",
   "anchor": "Učitel IT - Niklas Lundell",
   "problem": "Rodiče se neustále hádaj",
