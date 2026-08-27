@@ -20,11 +20,11 @@
     "lead": 0,
     "investigate": 4,
     "comprehend": 3,
-    "empathize": 1
+    "empathize": 2
   },
   "conditions": {
-    "upset": false,
-    "scared": false,
+    "upset": true,
+    "scared": true,
     "exhausted": false,
     "injured": false,
     "broken": false
@@ -37,6 +37,6 @@
   "relationships": "Thomas Tennant (11) - čas od času mu seženu nějaký součástky a on mi pomáhá pochopit techniku (Občas dokáže být docela otravnej)\n\nStatic - (Sebastian) (13) - Moc se spolu nebavíme, neutrální vztah\n\nStela Göringa (13) - vážím si jí, naučila mě používat makeup kterým schovávám modřiny, nosí zrcátko\n\nMaria (Maja) Forsberg (14) - potkávám jí v horší čtvrti poblíž skládky ale vyhýbám se jí. Závidím jí jak moc má volnosti a jak si dokáže prosadit své. Závidím jí její způsob života a její odvahu říct jak se cítí a co si myslí.\n\nSoused Mr. Karlsson - půjčuje mi nářadí, protože mu tvrdím (lžu), že mě pro něj poslal otec. Dokud vše vrátím včas tak to s tátou neřeší.\n",
   "items": "Multitool - kleštičky, nožík, šroubovák, pilník, háček ",
   "hideout": "Stará opuštěná trafostanice",
-  "xp": 2,
+  "xp": 1,
   "notes": "Dnes 4 - otec ; 5 - sny\n\nJaký den měl doma Simon: - sets Simons mood and casual RP\n6 - Bez problému - Veselý dělám vtípky až trochu bratty\n5 - Táta na mě řval - veselý a kamarádský\n4,3 - Táta mi dal pár facek ale nic hrozného - shovívavý a nedůrazný\n2,1 - Táta mě totálně zmlátil - zamlklý bojácný\n\nHe doesnt remember his dreams, but he finds peace in them (sometimes) - sets how much in scared in action and how much adventurous I am\n1,2-he wakes up begging and crying in a middle of a night - v krizi se bojí, utíká, schovává, zmrzne?\n3,4 - he wakes up in the morning with tears in his eyes - v krizi panikaří, ale reaguje včasně\n5,6 - he wakes up calmly - v krizi reaguje okamžitě a klidně"
 }
