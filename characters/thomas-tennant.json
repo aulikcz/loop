@@ -23,10 +23,10 @@
     "empathize": 0
   },
   "conditions": {
-    "upset": true,
-    "scared": true,
-    "exhausted": true,
-    "injured": true,
+    "upset": false,
+    "scared": false,
+    "exhausted": false,
+    "injured": false,
     "broken": false
   },
   "luckUsed": [],
