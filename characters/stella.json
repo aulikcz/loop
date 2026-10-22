@@ -10,7 +10,7 @@
   },
   "skills": {
     "sneak": 3,
-    "force": 1,
+    "force": 2,
     "move": 3,
     "tinker": 0,
     "program": 0,
@@ -37,6 +37,6 @@
   "relationships": "Sebastian - crush\nThomas - vnímám určité napětí - nebaví se s holkami - neutrální\nSimon - vím o rodinných vztazích - pozitivní\nMaya - chodíme spolu do kroužku malování - kámošky",
   "items": "Zrcátko - iconic item",
   "hideout": "Opuštěná trafostanice",
-  "xp": 2,
+  "xp": 4,
   "notes": "-"
 }
